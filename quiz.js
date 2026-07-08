@@ -414,7 +414,7 @@ function showResultAnimation(resultKey, winner) {
       // "IT'S COMING HOME" text bubble
       +'<rect x="50" y="-40" width="110" height="26" rx="8" fill="#CF081F" opacity="0.9"/>'
       +'<polygon points="50,-20 40,-12 55,-12" fill="#CF081F" opacity="0.9"/>'
-      +'<text x="105" y="-30" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">IT'S COMING HOME!</text>'
+      +'<text x="105" y="-30" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">IT\'S COMING HOME!</text>'
       +'<text x="105" y="-19" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.8)" font-family="Arial,sans-serif">(sier de hvert. eneste. gang.)</text>'
       +'</g>'
       // Broken oar floating right
