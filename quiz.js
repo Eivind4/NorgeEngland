@@ -357,16 +357,11 @@ function showResultAnimation(resultKey, winner) {
 
   } else if (winner==='England'||eng>nor) {
     // England wins - Royal Guard drinking tea + broken oar
-    el.innerHTML='<svg width="100%" height="140" viewBox="0 0 400 140" xmlns="http://www.w3.org/2000/svg">'
-      +'<rect width="400" height="140" fill="#1a1a2e"/>'
-      +'<text x="200" y="18" text-anchor="middle" font-size="14" font-weight="900" fill="#CF081F" font-family="Arial,sans-serif">ENGLAND VINNER '+nor+'-'+eng+'</text>'
-      // Background: Buckingham Palace suggestion - simple columns
-      +'<rect x="50" y="50" width="8" height="60" fill="#333" opacity="0.4"/>'
-      +'<rect x="70" y="50" width="8" height="60" fill="#333" opacity="0.4"/>'
-      +'<rect x="90" y="50" width="8" height="60" fill="#333" opacity="0.4"/>'
-      +'<rect x="40" y="108" width="70" height="5" fill="#333" opacity="0.4"/>'
+    el.innerHTML='<svg width="100%" height="150" viewBox="0 0 400 150" xmlns="http://www.w3.org/2000/svg">'
+      +'<rect width="400" height="150" fill="#1a1a2e"/>'
+      +'<text x="200" y="20" text-anchor="middle" font-size="14" font-weight="900" fill="#CF081F" font-family="Arial,sans-serif">ENGLAND VINNER '+nor+'-'+eng+'</text>'
       // Royal Guard figure
-      +'<g transform="translate(110,68)">'
+      +'<g transform="translate(110,82)">'
       // Tall bearskin hat (black, tall)
       +'<rect x="-14" y="-62" width="28" height="38" rx="3" fill="#111"/>'
       +'<rect x="-14" y="-62" width="28" height="4" rx="1" fill="#333"/>'
@@ -415,7 +410,7 @@ function showResultAnimation(resultKey, winner) {
       +'<rect x="50" y="-40" width="110" height="26" rx="8" fill="#CF081F" opacity="0.9"/>'
       +'<polygon points="50,-20 40,-12 55,-12" fill="#CF081F" opacity="0.9"/>'
       +'<text x="105" y="-30" text-anchor="middle" font-size="9" font-weight="900" fill="white" font-family="Arial,sans-serif">IT\'S COMING HOME!</text>'
-      +'<text x="105" y="-19" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.8)" font-family="Arial,sans-serif">(sier de hvert. eneste. gang.)</text>'
+      +'<text x="105" y="-19" text-anchor="middle" font-size="8" fill="rgba(255,255,255,0.8)" font-family="Arial,sans-serif">(er det i år det skjer?)</text>'
       +'</g>'
       // Broken oar floating right
       +'<g transform="translate(280,105) rotate(-15)">'
