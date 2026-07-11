@@ -164,7 +164,7 @@ select:focus{outline:none;border-color:#003087;}
 
   <!-- Countdown -->
   <div id="countdownBox" style="background:#e8f5e9;border:1.5px solid #a5d6a7;border-radius:12px;padding:12px 16px;text-align:center;">
-    <div style="font-size:11px;font-weight:900;color:#555;letter-spacing:2px;margin-bottom:6px;">REGISTRERING STENGER KL. 21:00 - 11. JULI 2026</div>
+    <div style="font-size:11px;font-weight:900;color:#555;letter-spacing:2px;margin-bottom:6px;">REGISTRERING STENGER KL. 23:00 - 11. JULI 2026</div>
     <div style="display:flex;justify-content:center;gap:10px;">
       <div style="text-align:center;"><div style="font-family:'Anton',sans-serif;font-size:26px;color:#1b5e20;min-width:40px;" id="cd-d">--</div><div style="font-size:10px;font-weight:700;color:#555;letter-spacing:1px;">DAGER</div></div>
       <div style="font-family:'Anton',sans-serif;font-size:24px;color:#a5d6a7;padding-top:2px;">:</div>
@@ -177,7 +177,7 @@ select:focus{outline:none;border-color:#003087;}
   </div>
   <div id="lockBanner" style="display:none;background:#fce4ec;border:2px solid #e53935;border-radius:12px;padding:14px;text-align:center;">
     <div style="font-family:'Anton',sans-serif;font-size:18px;color:#c62828;">REGISTRERING STENGT</div>
-    <div style="font-size:13px;color:#c62828;margin-top:4px;font-weight:700;">Fristen kl. 21:00 er passert.</div>
+    <div style="font-size:13px;color:#c62828;margin-top:4px;font-weight:700;">Fristen kl. 23:00 er passert.</div>
   </div>
 
   <div class="firebase-status" id="fbStatus"><span class="spinner"></span>Kobler til...</div>
@@ -500,9 +500,14 @@ select:focus{outline:none;border-color:#003087;}
     <div class="card">
       <div class="card-title" style="margin-bottom:8px;">🏆 POENGTAVLE</div>
       <div class="lb-tabs">
-        <div class="lb-tab active" id="lbt-total" onclick="setLbMode('total')">🏅 TOTALT</div>
-        <div class="lb-tab" id="lbt-best" onclick="setLbMode('best')">👑 BESTE I LAG</div>
-        <div class="lb-tab" id="lbt-teamavg" onclick="setLbMode('teamavg')">🏠 BESTE LAG</div>
+        <div class="lb-tab active" id="lbt-total" onclick="setLbMode('total')">🏅 ALLE</div>
+        <div class="lb-tab" id="lbt-team" onclick="setLbMode('team')">👥 FILTRER LAG</div>
+        <div class="lb-tab" id="lbt-teamavg" onclick="setLbMode('teamavg')">🏆 BESTE LAG</div>
+      </div>
+      <div id="teamFilterWrap" style="display:none;margin-bottom:10px;">
+        <select id="teamFilter" onchange="setTeamFilter(this.value)" style="width:100%;padding:9px 12px;font-size:14px;font-family:'Nunito',sans-serif;font-weight:700;border:2px solid #ddd;border-radius:10px;background:#f8f8f8;color:#111;cursor:pointer;">
+          <option value="">-- Alle lag --</option>
+        </select>
       </div>
       <div style="font-size:11px;color:#999;margin-bottom:12px;" id="lb-info">Live</div>
       <div id="lbList"></div>

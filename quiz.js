@@ -14,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-var DEADLINE = new Date('2026-07-11T21:00:00');
+var DEADLINE = new Date('2026-07-11T23:00:00');
 function isLocked() { return new Date() >= DEADLINE; }
 function pad(n) { return String(n).padStart(2,'0'); }
 
@@ -469,6 +469,7 @@ var avSVGs = {
 
 var medals=['🥇','🥈','🥉'];
 var lbMode='total';
+var teamFilter='';
 var allEntries=[];
 
 onValue(ref(db,'eng_entries'), function(snap) {
@@ -476,14 +477,39 @@ onValue(ref(db,'eng_entries'), function(snap) {
   if(snap.exists()) snap.forEach(function(c){ allEntries.push(c.val()); });
   renderLB();
   populatePlayerSelect();
+  populateTeamFilter();
 });
 
 window.setLbMode = function(mode) {
   lbMode=mode;
   document.querySelectorAll('.lb-tab').forEach(function(b){ b.classList.remove('active'); });
   document.getElementById('lbt-'+mode).classList.add('active');
+  var filterWrap = document.getElementById('teamFilterWrap');
+  if (filterWrap) filterWrap.style.display = mode==='team' ? 'block' : 'none';
   renderLB();
 };
+
+window.setTeamFilter = function(val) {
+  teamFilter = val;
+  renderLB();
+};
+
+function populateTeamFilter() {
+  var sel = document.getElementById('teamFilter');
+  if (!sel) return;
+  var current = sel.value;
+  sel.innerHTML = '<option value="">-- Alle lag --</option>';
+  var teams = [];
+  allEntries.forEach(function(e) {
+    if (e.team && teams.indexOf(e.team) < 0) teams.push(e.team);
+  });
+  teams.sort().forEach(function(t) {
+    var opt = document.createElement('option');
+    opt.value = t; opt.textContent = 'Lag: ' + t;
+    sel.appendChild(opt);
+  });
+  if (current) sel.value = current;
+}
 
 function renderLB() {
   var list=document.getElementById('lbList');
@@ -496,14 +522,16 @@ function renderLB() {
     var rows=allEntries.slice().sort(function(a,b){ return b.pts-a.pts; });
     renderRows(list, rows, function(e){ return (avNames[e.avatar]||'')+(e.team?' · Lag: '+e.team:''); });
 
-  } else if (lbMode==='best') {
-    var teamMap={};
-    allEntries.forEach(function(e){
-      var t=e.team||'__ingen__';
-      if(!teamMap[t]||e.pts>teamMap[t].pts) teamMap[t]=e;
-    });
-    var rows=Object.values(teamMap).sort(function(a,b){ return b.pts-a.pts; });
-    renderRows(list, rows, function(e){ return e.team?'Lag: '+e.team:'Ingen lag'; });
+  } else if (lbMode==='team') {
+    // Show all players in selected team (or all if no filter), ranked by pts
+    var filtered = teamFilter
+      ? allEntries.filter(function(e){ return e.team===teamFilter; })
+      : allEntries.slice();
+    filtered.sort(function(a,b){ return b.pts-a.pts; });
+    var label = teamFilter ? 'Lag: '+teamFilter : 'Alle lag';
+    renderRows(list, filtered, function(e){ return (avNames[e.avatar]||'')+(e.team?' · Lag: '+e.team:'Ingen lag'); });
+    document.getElementById('lb-info').textContent = label + ' - ' + filtered.length + ' deltakere - ' + new Date().toLocaleTimeString('no-NO');
+    return;
 
   } else if (lbMode==='teamavg') {
     var teamTot={};
